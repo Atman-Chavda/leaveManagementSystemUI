@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <div class="row mb-4">
+      <div class="col-12">
+        <h2>Work From Home</h2>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="wfhForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" id="date" class="form-control" formControlName="date">
+                <div *ngIf="submitted && f['date'].errors" class="text-danger mt-1">
+                  <small *ngIf="f['date'].errors['required']">Date is required</small>
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label for="reason" class="form-label">Reason</label>
+                <textarea id="reason" class="form-control" rows="4" formControlName="reason" 
+                  placeholder="Please provide a reason for working from home"></textarea>
+                <div *ngIf="submitted && f['reason'].errors" class="text-danger mt-1">
+                  <small *ngIf="f['reason'].errors['required']">Reason is required</small>
+                </div>
+              </div>
+              
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-outline-secondary me-2" (click)="resetForm()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit WFH Request</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <div class="row mb-4">
+      <div class="col-12">
+        <h2>Request New Leave</h2>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="leaveType" class="form-label">Leave Type</label>
+                <select id="leaveType" class="form-select" formControlName="leaveType">
+                  <option value="">Select leave type</option>
+                  <option value= 1>Privledge Leave Full Day</option>
+                  <option value= 2>Privledge Leave First Half Day</option>
+                  <option value= 3>Privledge Leave Second Half</option>
+                  <option value= 4>Sick Leave</option>
+                  <option value= 5>Berevment Leave</option>
+                  <option value= 6>Maternity Leave</option>
+                </select>
+                <div *ngIf="submitted && f['leaveType'].errors" class="text-danger mt-1">
+                  <small *ngIf="f['leaveType'].errors['required']">Leave type is required</small>
+                </div>
+              </div>
+              
+              @if(leaveForm.get('leaveType')!.value == 5)
+              {
+                <div class="row mb-3">
+                  <div class="col-md-6 mb-3 mb-md-0">
+                    <label for="BLleaveType" class="form-label">Relation With Person</label>
+                      <select id="leaveType" class="form-select">
+                        <option value="">Select leave type</option>
+
+                        
+                  <option value= 1>Mother</option>
+                  <option value= 2>Father</option>
+                  <option value= 3>Son</option>
+                  <option value= 4>Doughter</option>
+                  <option value= 5>In Law</option>
+                  <option value= 6>Spouse</option>
+                </select>
+                    <div *ngIf="submitted && f['dateFrom'].errors" class="text-danger mt-1">
+                      <small *ngIf="f['dateFrom'].errors['required']">Start date is required</small>
+                    </div>
+                  </div>
+                </div>
+              }
+              
+
+              <div class="row mb-3">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label for="dateFrom" class="form-label">Start Date</label>
+                  <input type="date" id="dateFrom" class="form-control" formControlName="dateFrom">
+                  <div *ngIf="submitted && f['dateFrom'].errors" class="text-danger mt-1">
+                    <small *ngIf="f['dateFrom'].errors['required']">Start date is required</small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="dateTo" class="form-label">End Date</label>
+                  <input type="date" id="dateTo" class="form-control" formControlName="dateTo">
+                  <div *ngIf="submitted && f['dateTo'].errors" class="text-danger mt-1">
+                    <small *ngIf="f['dateTo'].errors['required']">End date is required</small>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label for="reason" class="form-label">Reason</label>
+                <textarea id="reason" class="form-control" rows="4" formControlName="reason" 
+                  placeholder="Please provide a reason for your leave request"></textarea>
+                <div *ngIf="submitted && f['reason'].errors" class="text-danger mt-1">
+                  <small *ngIf="f['reason'].errors['required']">Reason is required</small>
+                </div>
+              </div>
+              
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-outline-secondary me-2" (click)="resetForm()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit Request</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

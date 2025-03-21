@@ -1,0 +1,167 @@
+<div class="container-fluid">
+  <div class="row mb-4">
+    <div class="col-12">
+      <div
+        class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3"
+      >
+        <h2 class="mb-0">Dashboard</h2>
+
+        <div class="d-flex flex-column flex-md-row gap-3">
+          <div class="input-group date-input">
+            <input
+              type="date"
+              class="form-control"
+              placeholder="Start Date"
+              [(ngModel)]="startDate"
+            />
+            <input
+              type="date"
+              class="form-control"
+              placeholder="End Date"
+              (change)="applyFilters()"
+              [(ngModel)]="endDate"
+            />
+          </div>
+
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+            >
+              <i class="bi bi-funnel me-1"></i> {{ selectedFilter }}
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item data-input" (click)="setFilter('All')"
+                  >All</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><h6 class="dropdown-header">Leave Type</h6></li>
+              <li>
+                <a class="dropdown-item" (click)="setFilter('Annual Leave')"
+                  >Annual Leave</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="setFilter('Sick Leave')"
+                  >Sick Leave</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="setFilter('Work From Home')"
+                  >Work From Home</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="setFilter('Out of Office')"
+                  >Out of Office</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><h6 class="dropdown-header">Status</h6></li>
+              <li>
+                <a class="dropdown-item" (click)="setFilter('Approved')"
+                  >Approved</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="setFilter('Pending')"
+                  >Pending</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="setFilter('Rejected')"
+                  >Rejected</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeTab === 'leaves'" (click)="setActiveTab('leaves')">Leave Details</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeTab === 'wfh'" (click)="setActiveTab('wfh')">WFH Details</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeTab === 'oof'" (click)="setActiveTab('oof')">OOF Details</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <h5 class="card-title mb-0">Leave History</h5>
+          <span *ngIf="selectedFilter !== 'All'" class="badge bg-primary">{{
+            selectedFilter
+          }}</span>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover text-center">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Duration</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let leave of filteredLeaves">
+                  <td>{{ leave.leaveType }}</td>
+                  <td>{{ leave.dateFrom | date }}</td>
+                  <td>{{ leave.dateTo | date }}</td>
+                  <td>
+                    {{ leaveService.calculateDuration(leave.dateFrom, leave.dateTo) }} day(s)
+                  </td>
+                  <td>
+                    <span class="badge" [ngClass]="getStatusBadgeClass(leave.leaveStatus)">
+                      {{ leave.leaveStatus }}
+                    </span>
+                  </td>
+                  <td>
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-outline-primary"  >
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger" (click)="deleteLeave(leave.leaveId); $event.stopPropagation();">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+            
+                
+                <tr *ngIf="filteredLeaves.length === 0">
+                  <td colspan="6" class="text-center py-4">
+                    <div class="spinner-border text-dark" role="status"></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

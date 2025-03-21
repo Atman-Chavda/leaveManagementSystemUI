@@ -1,0 +1,63 @@
+<aside class="sidebar" [class.collapsed]="!sidebarService.isExpanded()">
+    <div class="sidebar-header">
+      <div class="logo">
+        <i class="bi bi-calendar-check"></i>
+        <span>LMS</span>
+      </div>
+      <button class="btn close-btn d-md-none" (click)="closeSidebar()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    
+    <div class="sidebar-content">
+      <nav class="nav-menu">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a routerLink="/dashboard" routerLinkActive="active" class="nav-link" (click)="closeOnMobile()">
+              <i class="bi bi-speedometer2"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/new-leave" routerLinkActive="active" class="nav-link" (click)="closeOnMobile()">
+              <i class="bi bi-plus-circle"></i>
+              <span>New Leave</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/wfh" routerLinkActive="active" class="nav-link" (click)="closeOnMobile()">
+              <i class="bi bi-laptop"></i>
+              <span>WFH</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/oof" routerLinkActive="active" class="nav-link" (click)="closeOnMobile()">
+              <i class="bi bi-calendar-x"></i>
+              <span>OOF</span>
+            </a>
+          </li>
+        </ul>
+        
+        <div class="nav-divider"></div>
+        
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a routerLink="/profile" routerLinkActive="active" class="nav-link" (click)="closeOnMobile()">
+              <i class="bi bi-person"></i>
+              <span>Profile</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link logout">
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+  
+  <div class="sidebar-backdrop" *ngIf="sidebarService.isExpanded() && isMobile()" (click)="closeSidebar()"></div>
+  
+  

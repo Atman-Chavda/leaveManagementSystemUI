@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div class="row mb-4">
+      <div class="col-12">
+        <h2>Out of Office</h2>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="oofForm" (ngSubmit)="onSubmit()">
+              <div class="row mb-3">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label for="startDateTime" class="form-label">Start Date & Time</label>
+                  <input type="datetime-local" id="startDateTime" class="form-control" formControlName="startDateTime">
+                  <div *ngIf="submitted && f['startDateTime'].errors" class="text-danger mt-1">
+                    <small *ngIf="f['startDateTime'].errors['required']">Start date & time is required</small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="endDateTime" class="form-label">End Date & Time</label>
+                  <input type="datetime-local" id="endDateTime" class="form-control" formControlName="endDateTime">
+                  <div *ngIf="submitted && f['endDateTime'].errors" class="text-danger mt-1">
+                    <small *ngIf="f['endDateTime'].errors['required']">End date & time is required</small>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" class="form-control" rows="4" formControlName="message" 
+                  placeholder="Out of office message"></textarea>
+                <div *ngIf="submitted && f['message'].errors" class="text-danger mt-1">
+                  <small *ngIf="f['message'].errors['required']">Message is required</small>
+                </div>
+              </div>
+              
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-outline-secondary me-2" (click)="resetForm()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Set OOF Status</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

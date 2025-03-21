@@ -1,0 +1,28 @@
+<header class="header">
+    <div class="d-flex align-items-center">
+      <button class="btn d-md-none me-2" type="button" (click)="toggleSidebar()">
+        <i class="bi bi-list fs-4"></i>
+      </button>
+      <h1 class="mb-0">Leave Management System</h1>
+    </div>
+    
+    <div class="d-flex align-items-center">
+      <button class="btn theme-toggle" (click)="toggleTheme()">
+        <i class="bi" [ngClass]="themeService.isDarkMode() ? 'bi-sun' : 'bi-moon'"></i>
+      </button>
+      <div class="dropdown ms-3">
+        <button class="btn user-dropdown" type="button" data-bs-toggle="dropdown">
+          <i class="bi bi-person-circle me-1"></i>
+          <span class="d-none d-md-inline">John Doe</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  
+  
